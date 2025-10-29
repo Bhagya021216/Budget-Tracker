@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Income & Expense Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Budget Tracker</div>
+      <div class="theme-toggle" id="themeToggle">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="personal">
+        <span>👤 Personal</span>
+      </div>
+      <div class="tab" data-tab="business">
+        <span>💼 Business</span>
+      </div>
+    </div>
+
+    <div id="personalSection" class="tab-content active personal-theme">
+      <div class="stats-grid">
+        <div class="stat-card income">
+          <div class="stat-label">Total Income</div>
+          <div class="stat-value" id="personalIncome">RS 0.00</div>
+          <div class="stat-icon">💰</div>
+        </div>
+        <div class="stat-card expense">
+          <div class="stat-label">Total Expenses</div>
+          <div class="stat-value" id="personalExpense">RS 0.00</div>
+          <div class="stat-icon">📉</div>
+        </div>
+        <div class="stat-card balance" id="personalBalanceCard">
+          <div class="stat-label">Balance</div>
+          <div class="stat-value" id="personalBalance">RS 0.00</div>
+          <div class="stat-icon">⚖️</div>
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="input-group">
+          <input type="text" class="form-control" id="personalDesc" placeholder="Description (e.g., Salary, Food)">
+          <input type="number" class="form-control" id="personalAmount" placeholder="Amount (RS)">
+          <button class="btn btn-toggle active" id="personalTypeBtn">+ Income</button>
+          <button class="btn btn-primary" id="personalAddBtn">Add Transaction</button>
+        </div>
+      </div>
+
+      <div class="transactions">
+        <div class="transactions-header">
+          <div class="transactions-title">Recent Transactions</div>
+          <div class="action-buttons">
+            <button class="btn btn-warning btn-small" id="personalClearBtn">Clear Month</button>
+            <button class="btn btn-success btn-small" id="personalExportBtn">Export CSV</button>
+            <button class="btn btn-primary btn-small" id="personalSummaryBtn">Monthly Summary</button>
+            <button class="btn btn-danger btn-small" id="compareAccountsBtn">Compare Accounts</button>
+          </div>
+        </div>
+        <div class="transaction-list" id="personalList">
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <p>No transactions yet. Add your first one!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="businessSection" class="tab-content business-theme" style="display: none;">
+      <div class="stats-grid">
+        <div class="stat-card income">
+          <div class="stat-label">Total Revenue</div>
+          <div class="stat-value" id="businessIncome">RS 0.00</div>
+          <div class="stat-icon">📈</div>
+        </div>
+        <div class="stat-card expense">
+          <div class="stat-label">Total Costs</div>
+          <div class="stat-value" id="businessExpense">RS 0.00</div>
+          <div class="stat-icon">💸</div>
+        </div>
+        <div class="stat-card balance" id="businessBalanceCard">
+          <div class="stat-label">Net Profit</div>
+          <div class="stat-value" id="businessBalance">RS 0.00</div>
+          <div class="stat-icon">🏆</div>
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="input-group">
+          <input type="text" class="form-control" id="businessDesc" placeholder="Description (e.g., Sales, Rent)">
+          <input type="number" class="form-control" id="businessAmount" placeholder="Amount (RS)">
+          <button class="btn btn-toggle active" id="businessTypeBtn">+ Income</button>
+          <button class="btn btn-primary" id="businessAddBtn">Add Transaction</button>
+        </div>
+      </div>
+
+      <div class="transactions">
+        <div class="transactions-header">
+          <div class="transactions-title">Business Transactions</div>
+          <div class="action-buttons">
+            <button class="btn btn-warning btn-small" id="businessClearBtn">Clear Month</button>
+            <button class="btn btn-success btn-small" id="businessExportBtn">Export CSV</button>
+            <button class="btn btn-primary btn-small" id="businessSummaryBtn">Monthly Summary</button>
+            <button class="btn btn-danger btn-small" id="compareAccountsBtn">Compare Accounts</button>
+          </div>
+        </div>
+        <div class="transaction-list" id="businessList">
+          <div class="empty-state">
+            <div class="empty-icon">📊</div>
+            <p>No business transactions yet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Modal -->
+  <div class="modal" id="summaryModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Monthly Summary</div>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div id="summaryContent">
+        <!-- Content injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div class="modal" id="compareModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Account Comparison</div>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div id="compareContent">
+        <!-- Content injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
