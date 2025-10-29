@@ -108,7 +108,7 @@
             <button class="btn btn-warning btn-small" id="businessClearBtn">Clear Month</button>
             <button class="btn btn-success btn-small" id="businessExportBtn">Export CSV</button>
             <button class="btn btn-primary btn-small" id="businessSummaryBtn">Monthly Summary</button>
-            <button class="btn btn-danger btn-small" id="compareAccountsBtn">Compare Accounts</button>
+            <button class="btn btn-danger btn-small" id="businessCompareAccountsBtn">Compare Accounts</button>
           </div>
         </div>
         <div class="transaction-list" id="businessList">
@@ -142,6 +142,19 @@
         <button class="close-modal">&times;</button>
       </div>
       <div id="compareContent">
+        <!-- Content injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Modal -->
+  <div class="modal" id="actionModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="actionTitle">Action</div>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div id="actionContent">
         <!-- Content injected via JS -->
       </div>
     </div>

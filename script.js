@@ -92,7 +92,7 @@ class TransactionManager {
     const amount = parseFloat(this.amountInput.value);
 
     if (!desc || isNaN(amount) || amount <= 0) {
-      alert('Please enter valid description and amount');
+      this.showActionModal('Invalid Input', 'Please enter valid description and amount.', 'error');
       return;
     }
 
@@ -109,6 +109,7 @@ class TransactionManager {
     this.updateStats();
     this.renderTransactions();
     this.clearInputs();
+    this.showActionModal('Transaction Added', 'The transaction has been successfully added.', 'success');
   }
 
   editTransaction(id) {
@@ -124,6 +125,9 @@ class TransactionManager {
       this.saveTransactions();
       this.updateStats();
       this.renderTransactions();
+      this.showActionModal('Transaction Updated', 'The transaction has been successfully updated.', 'success');
+    } else {
+      this.showActionModal('Update Failed', 'Please enter valid description and amount.', 'error');
     }
   }
 
@@ -133,6 +137,7 @@ class TransactionManager {
       this.saveTransactions();
       this.updateStats();
       this.renderTransactions();
+      this.showActionModal('Transaction Deleted', 'The transaction has been successfully deleted.', 'success');
     }
   }
 
@@ -142,6 +147,7 @@ class TransactionManager {
       this.saveTransactions();
       this.updateStats();
       this.renderTransactions();
+      this.showActionModal('Transactions Cleared', 'All transactions for this month have been cleared.', 'success');
     }
   }
 
@@ -207,7 +213,7 @@ class TransactionManager {
 
   exportCSV() {
     if (this.transactions.length === 0) {
-      alert('No transactions to export');
+      this.showActionModal('Export Failed', 'No transactions to export.', 'error');
       return;
     }
 
@@ -251,6 +257,7 @@ class TransactionManager {
     a.click();
 
     URL.revokeObjectURL(url);
+    this.showActionModal('Export Successful', 'CSV file has been downloaded.', 'success');
   }
 
   showSummary() {
@@ -291,6 +298,27 @@ class TransactionManager {
   saveTransactions() {
     localStorage.setItem(`${this.type}Transactions`, JSON.stringify(this.transactions));
   }
+
+  showActionModal(title, message, type) {
+    const modal = document.getElementById('actionModal');
+    const titleEl = document.getElementById('actionTitle');
+    const contentEl = document.getElementById('actionContent');
+
+    titleEl.textContent = title;
+    contentEl.innerHTML = `
+      <div class="action-message ${type}">
+        <div class="action-icon">${type === 'success' ? '✅' : '❌'}</div>
+        <p>${message}</p>
+      </div>
+    `;
+
+    modal.classList.add('active');
+
+    // Auto-close after 3 seconds
+    setTimeout(() => {
+      modal.classList.remove('active');
+    }, 3000);
+  }
 }
 
 // Initialize managers
@@ -302,7 +330,7 @@ function initManagers() {
 }
 
 // Compare Accounts
-document.getElementById('compareAccountsBtn').addEventListener('click', () => {
+document.getElementById('businessCompareAccountsBtn').addEventListener('click', () => {
   const personalIncome = personalManager.transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
   const personalExpense = personalManager.transactions.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
   const personalBalance = personalIncome - personalExpense;
