@@ -329,8 +329,8 @@ function initManagers() {
   businessManager = new TransactionManager('business');
 }
 
-// Compare Accounts
-document.getElementById('businessCompareAccountsBtn').addEventListener('click', () => {
+// Compare Accounts Function
+function showCompareModal() {
   const personalIncome = personalManager.transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
   const personalExpense = personalManager.transactions.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
   const personalBalance = personalIncome - personalExpense;
@@ -371,7 +371,11 @@ document.getElementById('businessCompareAccountsBtn').addEventListener('click', 
 
   document.getElementById('compareContent').innerHTML = compareHTML;
   document.getElementById('compareModal').classList.add('active');
-});
+}
+
+// Compare Accounts Event Listeners
+document.getElementById('compareAccountsBtn').addEventListener('click', showCompareModal);
+document.getElementById('businessCompareAccountsBtn').addEventListener('click', showCompareModal);
 
 // Modal Close
 document.querySelectorAll('.close-modal').forEach(btn => {
