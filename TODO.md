@@ -1,0 +1,3 @@
+- [x] Create a reusable showCompareModal() function containing the compare logic
+- [x] Update the business compare button listener to use the new function
+- [x] Add event listener for the personal compare button to use the new function
